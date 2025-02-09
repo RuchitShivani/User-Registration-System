@@ -1,0 +1,148 @@
+#include<bits/stdc++.h> 
+using namespace std; 
+ 
+void login(); 
+void forgot (); 
+ 
+class Registration{ 
+    string ruserId, rpassword, id, pass; 
+ 
+    public: 
+    Registration(){ 
+        system("cls"); 
+        cout<<"\nEnter Username: "; 
+        cin>>ruserId; 
+        cout<<"\nEnter Password: "; 
+        cin>>rpassword; 
+        cout<<endl; 
+        ofstream f1("records.txt", ios::app); 
+        f1<<ruserId<<' '<<rpassword<<endl; 
+        system("cls"); 
+        cout<<"You are registered successfully!.\n"; 
+    } 
+}; 
+ 
+int main() { 
+ 17 
+ 
+ 
+ 
+    int c; 
+    cout<<"\n\n-------------------------------------WELCOME-------------------------------------\n\n"; 
+    cout<<"Press 1 to Login. \nPress 2 to Register. \nPress 3 if Forgot Password. \nPress 4 to 
+Exit.\n\n"; 
+    cout<<"Enter your choice:"; 
+    cin>>c; 
+ 
+    switch(c){ 
+        case 1: 
+            login(); 
+            break; 
+        case 2: 
+            Registration(); 
+            main(); 
+            break; 
+        case 3: 
+            forgot(); 
+            break; 
+        case 4: 
+            cout<<"\nThank you for visiting!"; 
+            break; 
+        default: 
+            system("cls"); 
+            cout<<"Please select valid option.\n"; 
+            main(); 
+    } 
+} 
+ 
+void login(){ 
+    int count=0; 
+ 18 
+ 
+ 
+ 
+    string userId, password, id, pass; 
+    system("cls"); 
+    cout<<"Enter Username and Password.\n\n"; 
+    cout<<"Username: "; 
+    cin>>userId; 
+    cout<<"Password: "; 
+    cin>>password; 
+    ifstream input ("records.txt"); 
+ 
+    while(input>>id>>pass) { 
+        if(id==userId && pass==password) { 
+            count=1; 
+            system("cls"); 
+        } 
+    } 
+    input.close(); 
+ 
+    if (count==1){ 
+        cout<<"\nLogin successful\n"; 
+        main(); 
+    } 
+    else{ 
+        cout<<"\nLogin Error. Invalid Username or Password.\n"; 
+        main(); 
+    } 
+} 
+ 
+void forgot(){ 
+    int option; 
+ 19 
+ 
+ 
+ 
+    system("cls"); 
+    cout<<"\nForgot password?\n\n"; 
+    cout<<"Press 1 to search ID by username\n"; 
+    cout<<"Press 2 to go back to main menu\n"; 
+    cout<<"Enter your choice: "; 
+    cin>>option; 
+ 
+    switch(option) { 
+        case 1: 
+        { 
+            int count=0; 
+            string suserId, sId, spass; 
+            cout<<"Enter your username: "; 
+            cin>>suserId; 
+            ifstream f2("records.txt"); 
+ 
+            while (f2>>sId>>spass) { 
+                if(sId==suserId) { 
+                    count=1; 
+                } 
+            } 
+            f2.close(); 
+ 
+            if (count==1){ 
+                cout<<"\nAccount found successfully! \n"; 
+                cout<<"Your password is: "<<spass; 
+                main(); 
+            } 
+            else{ 
+ 20 
+ 
+ 
+ 
+                cout<<"\nAccount not found."; 
+                main(); 
+            } 
+            break; 
+        } 
+        case 2:{ 
+            main(); 
+            break; 
+        } 
+        default:{ 
+            cout<<"\nWrong choice!\n"; 
+            break; 
+        } 
+    } 
+} 
+ 
+ 
+ 
+ 
